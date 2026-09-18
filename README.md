@@ -1,12 +1,6 @@
 # xmip-core-authorize-contract
 
-Authorize by contract: decides by whether this identity may present content under this contract; a message-layer policy. A technology of
-[xmip-core-authorize](https://github.com/IlleNilsson/xmip-core-authorize).
-
-Declared and not yet written; `architecture.toml` carries the maturity. When
-it is written it implements `Authorizer`, one mechanism at one gate (ADR-0050).
-What it may depend on is `repository-model.md` section 4 and ADR-0044: its
-capability, and no sibling.
+Contract authorization: whether this identity may present content under this Contract, from a list of what each Party or identity is permitted; a message-layer policy. A technology of [xmip-core-authorize](https://github.com/IlleNilsson/xmip-core-authorize).
 
 ## Toolchain
 
