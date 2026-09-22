@@ -69,15 +69,7 @@ impl Permission {
             && self
                 .contracts
                 .iter()
-                .any(|pattern| prefix_matches(pattern, contract))
-    }
-}
-
-/// A name, or every name under a prefix when the pattern ends in `*`.
-fn prefix_matches(pattern: &str, name: &str) -> bool {
-    match pattern.strip_suffix('*') {
-        Some(prefix) => name.starts_with(prefix),
-        None => pattern == name,
+                .any(|pattern| authorize::pattern::matches(pattern, contract))
     }
 }
 
