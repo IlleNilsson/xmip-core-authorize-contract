@@ -26,7 +26,7 @@ pub mod permission;
 
 use authorize::{Attempt, Authorizer, Decision};
 use context::IdentityFacts;
-pub use permission::{Permission, Subject};
+pub use permission::Permission;
 use xcore::Layer;
 
 /// The manifest leaf, and what a denial says it was denied by.
@@ -103,6 +103,7 @@ impl Authorizer for Contract {
 mod tests {
     use super::*;
     use authorize::Action;
+    use authorize::subject::Subject;
     use context::{Alignment, AuthenticatedIdentity, Verified};
     use xcore::{Established, PartyId, mechanism};
 
@@ -134,7 +135,7 @@ mod tests {
     fn orders() -> Contract {
         Contract::new()
             .permitting(Permission::new(Subject::Party(PartyId::new(7))).to_present("X12-850"))
-            .permitting(Permission::new(Subject::Any).to_present("X12-997"))
+            .permitting(Permission::new(Subject::Anyone).to_present("X12-997"))
     }
 
     fn presenting(contract: &str) -> Attempt {
