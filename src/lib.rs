@@ -4,7 +4,7 @@
 //!
 //! One policy: whether this identity may present content under this
 //! Contract. A Contract is the shape the content claims to have — an X12 850,
-//! an EDIFACT ORDERS, an HL7 ADT, a JSON Schema — and a partner permitted to
+//! an EDIFACT ORDERS, an HL7 ADT, a JSON Schema — and a Party permitted to
 //! send invoices is not thereby permitted to send purchase orders. The
 //! Attempt carries the Contract where one has been identified; a
 //! [`Permission`] says which Contracts one subject may present.
@@ -145,7 +145,7 @@ mod tests {
     #[test]
     fn a_party_permitted_the_contract_may_present_it() {
         let decision = orders().decide(
-            &isa06("ISA06=PARTNERX", Some(PartyId::new(7))),
+            &isa06("ISA06=PARTYX", Some(PartyId::new(7))),
             &presenting("X12-850"),
         );
 
@@ -155,14 +155,14 @@ mod tests {
     #[test]
     fn a_contract_the_party_is_not_permitted_is_denied_by_contract_saying_what_it_may() {
         let decision = orders().decide(
-            &isa06("ISA06=PARTNERX", Some(PartyId::new(7))),
+            &isa06("ISA06=PARTYX", Some(PartyId::new(7))),
             &presenting("X12-810"),
         );
 
         assert_eq!(
             decision.map(|decision| decision.to_string()),
             Some(
-                "denied by contract: 'ISA06=PARTNERX' may not present 'X12-810'; it may \
+                "denied by contract: 'ISA06=PARTYX' may not present 'X12-810'; it may \
                  present X12-850, X12-997"
                     .to_string()
             )
@@ -172,7 +172,7 @@ mod tests {
     #[test]
     fn with_no_contract_identified_there_is_nothing_to_judge() {
         let decision = orders().decide(
-            &isa06("ISA06=PARTNERX", Some(PartyId::new(7))),
+            &isa06("ISA06=PARTYX", Some(PartyId::new(7))),
             &Attempt::new(Action::Receive, "van-inbound"),
         );
 

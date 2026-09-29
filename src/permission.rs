@@ -47,7 +47,7 @@ mod tests {
     fn isa06() -> AuthenticatedIdentity {
         AuthenticatedIdentity::new(
             mechanism::edi_x12_interchange(),
-            "ISA06=PARTNERX",
+            "ISA06=PARTYX",
             Established::Detected,
             Verified::Claimed,
         )
@@ -57,7 +57,7 @@ mod tests {
     #[test]
     fn a_permission_matches_its_subject_and_a_contract_or_a_prefix_of_one() {
         let by_party = Permission::new(Subject::Party(PartyId::new(7))).to_present("X12-*");
-        let by_value = Permission::new(Subject::identity("ISA06=PARTNERX")).to_present("X12-850");
+        let by_value = Permission::new(Subject::identity("ISA06=PARTYX")).to_present("X12-850");
 
         assert!(by_party.permits(&isa06(), "X12-850"));
         assert!(by_party.permits(&isa06(), "X12-997"));
