@@ -139,7 +139,7 @@ mod tests {
     }
 
     fn presenting(contract: &str) -> Attempt {
-        Attempt::new(Action::Receive, "van-inbound").on_contract(contract)
+        Attempt::now(Action::Receive, "van-inbound").on_contract(contract)
     }
 
     #[test]
@@ -173,7 +173,7 @@ mod tests {
     fn with_no_contract_identified_there_is_nothing_to_judge() {
         let decision = orders().decide(
             &isa06("ISA06=PARTYX", Some(PartyId::new(7))),
-            &Attempt::new(Action::Receive, "van-inbound"),
+            &Attempt::now(Action::Receive, "van-inbound"),
         );
 
         assert_eq!(decision, None);
