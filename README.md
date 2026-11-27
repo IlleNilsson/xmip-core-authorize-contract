@@ -13,11 +13,6 @@ that proved to be another Party, or none, is denied before any permission
 is read, here and nowhere else (the owner, 2026-11-10; ADR-0019, amendment
 2026-11-11). No node links this policy yet.
 
-## Toolchain
-
-`rust-toolchain.toml` pins the toolchain for the whole estate. Do not change it
-here.
-
 ## Verification
 
 `cargo test`: nine tests — a Party permitted a Contract presents it; one
